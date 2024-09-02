@@ -1,6 +1,6 @@
 # convex-backend-docker
 
-Run [convex-backend](https://convex.dev) in a docker container.
+This is an inofficial docker image for [convex-backend](https://github.com/get-convex/convex-backend).
 
 The Dockerfile clones the repo from github at the specified release tag. A github action builds the image and pushes it to ghcr.io.
 
