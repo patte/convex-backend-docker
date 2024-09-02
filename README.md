@@ -12,7 +12,7 @@ docker pull ghcr.io/patte/convex-backend:latest # or tag :precompiled-2024-09-02
 > [!WARNING]
 > Sporadic updates only
 > 
-> Building the `linux/arm64` image does exceed the timeout of the free github runner (6h). A local runner is used to build the image (~16min on MacBook Air M2, with bad internet). Until a better solution is found, there will only be irregular updates of the image, as keeping the local runner up is obviously not an option.
+> Building the `linux/arm64` image does exceed the timeout of the free github runner (6h). A local runner is used to build the image for `linux/arm64` (~16min - MacBook Air M2, bad internet). Until a better solution is found, there will only be irregular updates, as keeping the local runner up is obviously not an option.
 > `amd64` builds are done on the default runner `ubuntu-latest`.
 
 
