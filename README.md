@@ -2,8 +2,11 @@
 
 Run [convex-backend](https://convex.dev) in a docker container.
 
-The Dockerfile clones the repo from github at the specified release tag.
-A github action builds the image and pushes it to ghcr.io.
+The Dockerfile clones the repo from github at the specified release tag. A github action builds the image and pushes it to ghcr.io.
+
+```bash
+ghcr.io/patte/convex-backend-docker:latest
+```
 
 ## Build
 
@@ -53,4 +56,21 @@ services:
 ```bash
 CONVEX_INSTANCE_NAME=flying-fox-123
 CONVEX_INSTANCE_SECRET=4fd28a3d07b61dcfc71518f8fae8c036e4110e47fef40195ce805c110408cf21
+```
+
+## GitHub Actions
+The [docker-build](.github/workflows/docker-build.yml) action builds the image and pushes it to ghcr.io.
+The following architectures are built:
+- `linux/amd64`
+- `linux/arm64`
+
+### Local runner
+For `linux/arm64` the build takes longer than the timeout of 6 hours on the default action runner at the time of writing. `docker-compose.yml` is used to start a local github action runner to help speed up the build.
+
+The github action is [set to use](.github/workflows/docker-build.ymlL24) the local runner for `linux/arm64` and the default runner for `linux/amd64`.
+
+```bash
+cp .env.example .env # adapt .env
+docker compose up -d
+docker compose logs -f
 ```
