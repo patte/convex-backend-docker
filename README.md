@@ -17,7 +17,6 @@ docker pull ghcr.io/patte/convex-backend:latest # or tag :precompiled-2024-09-02
 
 
 ## Usage
-See: [self-hosting](https://github.com/get-convex/convex-backend/blob/main/SELFHOSTING.md)
 
 ### bin
 ```bash
@@ -25,6 +24,7 @@ generate_secret
 generate_key KEY_NAME SECRET
 convex-local-backend --instance-name INSTANCE_NAME --instance-secret INSTANCE_SECRET
 ```
+See: [SELFHOSTING.md](https://github.com/get-convex/convex-backend/blob/main/SELFHOSTING.md) in convex-backend
 
 ### Generate keys
     
