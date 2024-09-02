@@ -146,10 +146,12 @@ jobs:
           tag_name: ${{ env.RELEASE_TAG }}
           release_name: "Release ${{ env.RELEASE_TAG }}"
           body: |
-            This is based on convex-backend's release: ${{ env.RELEASE_TAG }}](https://github.com/get-convex/convex-backend/releases/tag/${{ env.RELEASE_TAG }}).
+            This is based on convex-backend's release: [${{ env.RELEASE_TAG }}](https://github.com/get-convex/convex-backend/releases/tag/${{ env.RELEASE_TAG }}).
             New Docker images have been built and are available at the following locations:
 
             - `ghcr.io/${{ github.repository }}:${{ env.RELEASE_TAG }}`
             - `ghcr.io/${{ github.repository }}:latest`
+
+            [convex-backend-docker on ghcr.io](https://github.com/patte/convex-backend-docker/pkgs/container/convex-backend-docker)
           draft: false
           prerelease: false
