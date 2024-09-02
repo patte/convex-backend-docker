@@ -2,7 +2,7 @@ name: Build and Publish Docker Image
 
 on:
   schedule:
-    - cron: "0 0 * * *" # Runs daily at midnight UTC
+    - cron: "0 0 * * 6" # Runs every Saturday at midnight
   workflow_dispatch: # Allows manual triggering
 
 env:
