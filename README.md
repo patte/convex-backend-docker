@@ -2,11 +2,11 @@
 
 This is an inofficial docker image for [convex-backend](https://github.com/get-convex/convex-backend).
 
-The Dockerfile clones the repo from github at the specified release tag. A github action builds the image and pushes it to [ghcr.io](https://github.com/patte/convex-backend-docker/pkgs/container/convex-backend-docker).
+The Dockerfile clones the repo from github at the specified release tag. A github action builds the image and pushes it to [ghcr.io](https://github.com/patte/convex-backend-docker/pkgs/container/convex-backend).
 
 
 ```bash
-docker pull ghcr.io/patte/convex-backend-docker:latest # or tag :precompiled-2024-09-02-64b5093
+docker pull ghcr.io/patte/convex-backend:latest # or tag :precompiled-2024-09-02-64b5093
 ```
 
 > [!WARNING]
@@ -21,8 +21,8 @@ docker pull ghcr.io/patte/convex-backend-docker:latest # or tag :precompiled-202
 ### Generate keys
     
 ```bash
-export INSTANCE_SECRET=$(docker run --rm ghcr.io/patte/convex-backend-docker generate_secret) && \
-export ADMIN_KEY=$(docker run --rm ghcr.io/patte/convex-backend-docker generate_key $INSTANCE_NAME $INSTANCE_SECRET | awk '/Admin Key:/{getline; print}') &&  \
+export INSTANCE_SECRET=$(docker run --rm ghcr.io/patte/convex-backend generate_secret) && \
+export ADMIN_KEY=$(docker run --rm ghcr.io/patte/convex-backend generate_key $INSTANCE_NAME $INSTANCE_SECRET | awk '/Admin Key:/{getline; print}') &&  \
 export INSTANCE_NAME=flying-fox-123
 ```
 
@@ -31,7 +31,7 @@ export INSTANCE_NAME=flying-fox-123
 docker run \
   -v ./local:/app \
   -p 3210:3210 -p 3211:3211 \
-  ghcr.io/patte/convex-backend-docker convex-local-backend \
+  ghcr.io/patte/convex-backend convex-local-backend \
   --instance-name $INSTANCE_NAME --instance-secret $INSTANCE_SECRET
 ```
 
@@ -40,7 +40,7 @@ docker-compose.yml
 ```yaml
 services:
   convex-backend:
-    image: ghcr.io/patte/convex-backend-docker:latest
+    image: ghcr.io/patte/convex-backend:latest
     # image: convex-backend
     env_file:
       - .env

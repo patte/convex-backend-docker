@@ -2,9 +2,15 @@ name: Build and Publish Docker Image
 
 on:
   workflow_dispatch: # Allows manual triggering
+    inputs:
+      force:
+        description: "Force a new build"
+        required: false
+        default: false
+        type: boolean
 
 env:
-  REGISTRY_IMAGE: ghcr.io/${{ github.repository }}
+  REGISTRY_IMAGE: ghcr.io/patte/convex-backend
 
 jobs:
   init:
@@ -16,10 +22,12 @@ jobs:
           RELEASE_TAG=$(curl -s https://api.github.com/repos/get-convex/convex-backend/releases/latest | grep "tag_name" | cut -d\" -f4)
           echo "RELEASE_TAG=$RELEASE_TAG" >> $GITHUB_ENV
 
-          PREVIOUS_TAG=$(docker inspect ghcr.io/${{ github.repository }}:latest --format '{{ index .Config.Labels "org.opencontainers.image.version" }}' || echo "none")
+          PREVIOUS_TAG=$(docker inspect ${{ env.REGISTRY_IMAGE }}:latest --format '{{ index .Config.Labels "org.opencontainers.image.version" }}' || echo "none")
 
           if [ -z "$PREVIOUS_TAG" ]; then
             echo "No previous image found. Proceeding with the build of release: $RELEASE_TAG."
+          elif [ "${{ github.event.inputs.force }}" == "true" ]; then
+            echo "Forced build detected. Proceeding with the build of release: $RELEASE_TAG."
           elif [ "$RELEASE_TAG" == "$PREVIOUS_TAG" ]; then
             echo "No new release detected. Exiting."
             exit 0
@@ -149,9 +157,9 @@ jobs:
             This is based on convex-backend's release: [${{ env.RELEASE_TAG }}](https://github.com/get-convex/convex-backend/releases/tag/${{ env.RELEASE_TAG }}).
             New Docker images have been built and are available at the following locations:
 
-            - `ghcr.io/${{ github.repository }}:${{ env.RELEASE_TAG }}`
-            - `ghcr.io/${{ github.repository }}:latest`
+            - `${{ env.REGISTRY_IMAGE }}:${{ env.RELEASE_TAG }}`
+            - `${{ env.REGISTRY_IMAGE }}:latest`
 
-            [convex-backend-docker on ghcr.io](https://github.com/patte/convex-backend-docker/pkgs/container/convex-backend-docker)
+            [convex-backend on ghcr.io](https://github.com/patte/convex-backend-docker/pkgs/container/convex-backend)
           draft: false
           prerelease: false
