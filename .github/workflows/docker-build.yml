@@ -59,6 +59,8 @@ jobs:
         with:
           context: .
           platforms: ${{ matrix.platform }}
+          build-args: |
+            RELEASE_TAG=${{ env.RELEASE_TAG }}
           tags: |
             ${{ env.REGISTRY_IMAGE }}:${{ env.RELEASE_TAG }}-${{ env.PLATFORM_PAIR }}
           labels: |
