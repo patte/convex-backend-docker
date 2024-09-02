@@ -3,6 +3,7 @@
 Run [convex-backend](https://convex.dev) in a docker container.
 
 The Dockerfile clones the repo from github at the specified release tag.
+A github action builds the image and pushes it to ghcr.io.
 
 ## Build
 
@@ -37,7 +38,7 @@ docker-compose.yml
 ```yaml
 services:
   convex-backend:
-    image: convex-backend:latest
+    image: ghcr.io/patte/convex-backend-docker:latest
     env_file:
       - .env
     ports:
@@ -46,7 +47,6 @@ services:
     volumes:
       - ./local/convex-backend/:/app
     command: [ "convex-local-backend", "--instance-name", "$CONVEX_INSTANCE_NAME", "--instance-secret", "$CONVEX_INSTANCE_SECRET" ]
-
 ```
 
 .env
