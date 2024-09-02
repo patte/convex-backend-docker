@@ -12,8 +12,8 @@ docker pull ghcr.io/patte/convex-backend:latest # or tag :precompiled-2024-09-02
 > [!WARNING]
 > Sporadic updates only
 > 
-> Building the `linux/arm64` image does exceed the timeout of the free github runner (6h). A local runner is used to build the image (~16min on MacBook Air M2, with bad internet). Until a better solution is found, there will only be sporadic updates of the image, as keeping the local runner running is obviously not an option.
-> `amd64` builds are done on the default runner.
+> Building the `linux/arm64` image does exceed the timeout of the free github runner (6h). A local runner is used to build the image (~16min on MacBook Air M2, with bad internet). Until a better solution is found, there will only be irregular updates of the image, as keeping the local runner up is obviously not an option.
+> `amd64` builds are done on the default runner `ubuntu-latest`.
 
 
 ## Usage
@@ -77,9 +77,9 @@ The [docker-build](.github/workflows/docker-build.yml) action builds the image a
 The following architectures are built: `linux/amd64`, `linux/arm64`
 
 #### Local runner
-For `linux/arm64` the build takes longer than the timeout of 6 hours on the default action runner at the time of writing. `docker-compose.yml` is used to start a local github action runner to help speed up the build.
+For `linux/arm64` the build takes longer than the timeout of 6 hours on the free github action runner (at the time of writing). `docker-compose.yml` is used to start a local github action runner to speed up the build.
 
-The github action is [set to use](.github/workflows/docker-build.ymlL24) the local runner for `linux/arm64` and the default runner for `linux/amd64`. Get a runner key from: github.com/your/repo/settings/actions/runners/new.
+The github action is [set to use](.github/workflows/docker-build.ymlL24) the local runner for `linux/arm64` and the default runner for `linux/amd64`. Get a runner key from: github.com/your/repo/settings/actions/runners/new
 
 ```bash
 cp .env.example .env # adapt .env
