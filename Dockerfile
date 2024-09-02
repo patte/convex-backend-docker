@@ -84,4 +84,4 @@ EXPOSE 3211
 WORKDIR /app
 
 # Run
-CMD ["convex-local-backend", "--instance-name", "$INSTANCE_NAME", "--instance-secret", "$INSTANCE_SECRET"]
+CMD convex-local-backend --instance-name $INSTANCE_NAME --instance-secret $INSTANCE_SECRET
