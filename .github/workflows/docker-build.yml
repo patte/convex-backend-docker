@@ -67,7 +67,7 @@ jobs:
             org.opencontainers.image.version=${{ env.RELEASE_TAG }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          outputs: type=image,name=${{ env.REGISTRY_IMAGE }}:${{ env.RELEASE_TAG }}-${{ env.PLATFORM_PAIR }},push-by-digest=true,push=true
+          outputs: type=image,name=${{ env.REGISTRY_IMAGE }},push-by-digest=true,name-canonical=true,push=true
 
       - name: Export digest
         run: |
