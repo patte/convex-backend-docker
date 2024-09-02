@@ -2,14 +2,16 @@
 
 This is an inofficial docker image for [convex-backend](https://github.com/get-convex/convex-backend).
 
-The Dockerfile clones the repo from github at the specified release tag. A github action builds the image and pushes it to ghcr.io.
+The Dockerfile clones the repo from github at the specified release tag. A github action builds the image and pushes it to [ghcr.io](https://github.com/patte/convex-backend-docker/pkgs/container/convex-backend-docker).
+
 
 ```bash
 docker pull ghcr.io/patte/convex-backend-docker:latest # or tag :precompiled-2024-09-02-64b5093
 ```
 
 > [!WARNING]
-> Sporadic updates
+> Sporadic updates only
+> 
 > Building the `linux/arm64` image does exceed the timeout of the free github runner (6h). A local runner is used to build the image (~16min on MacBook Air M2, with bad internet). Until a better solution is found, there will only be sporadic updates of the image, as keeping the local runner running is obviously not an option.
 > `amd64` builds are done on the default runner.
 
@@ -65,14 +67,12 @@ CONVEX_INSTANCE_SECRET=4fd28a3d07b61dcfc71518f8fae8c036e4110e47fef40195ce805c110
 
 ## GitHub Actions
 The [docker-build](.github/workflows/docker-build.yml) action builds the image and pushes it to ghcr.io.
-The following architectures are built:
-- `linux/amd64`
-- `linux/arm64`
+The following architectures are built: `linux/amd64`, `linux/arm64`
 
 ### Local runner
 For `linux/arm64` the build takes longer than the timeout of 6 hours on the default action runner at the time of writing. `docker-compose.yml` is used to start a local github action runner to help speed up the build.
 
-The github action is [set to use](.github/workflows/docker-build.ymlL24) the local runner for `linux/arm64` and the default runner for `linux/amd64`.
+The github action is [set to use](.github/workflows/docker-build.ymlL24) the local runner for `linux/arm64` and the default runner for `linux/amd64`. Get a runner key from: github.com/your/repo/settings/actions/runners/new.
 
 ```bash
 cp .env.example .env # adapt .env
