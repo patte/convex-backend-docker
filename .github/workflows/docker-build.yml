@@ -26,8 +26,9 @@ jobs:
           else
             echo "New release detected: $RELEASE_TAG"
           fi
-      outputs:
-        release_tag: ${{ env.RELEASE_TAG }}
+    outputs:
+      release_tag: ${{ env.RELEASE_TAG }}
+
   build:
     needs: init
     strategy:
