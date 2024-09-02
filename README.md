@@ -17,6 +17,14 @@ docker pull ghcr.io/patte/convex-backend:latest # or tag :precompiled-2024-09-02
 
 
 ## Usage
+See: [self-hosting](https://github.com/get-convex/convex-backend/blob/main/SELFHOSTING.md)
+
+### bin
+```bash
+generate_secret
+generate_key KEY_NAME SECRET
+convex-local-backend --instance-name INSTANCE_NAME --instance-secret INSTANCE_SECRET
+```
 
 ### Generate keys
     
@@ -58,10 +66,29 @@ echo "CONVEX_INSTANCE_NAME=$INSTANCE_NAME"
 echo "CONVEX_INSTANCE_SECRET=$INSTANCE_SECRET"
 echo "CONVEX_ADMIN_KEY=\"$ADMIN_KEY\""
 
+CONVEX_URL=http://127.0.0.1/3210
 CONVEX_INSTANCE_NAME=flying-fox-123
 CONVEX_INSTANCE_SECRET=bfec6e5e65f70852f9276720310675cb50c1e1a238a160b4005a32d42f9a69af
 CONVEX_ADMIN_KEY="flying-fox-123|012e37a0303910b9375cabf2859920666e24917de9f614ec936cfbb9d584861c8970d7e06c57b7a2333d5d085270400c06"
 ```
+
+### TypeScript
+```bash
+source .env
+cd your_project
+bun install
+bun convex dev --url $CONVEX_URL --admin-key $CONVEX_ADMIN_KEY
+```
+
+package.json
+```json
+{
+  "scripts": {
+    "dev:backend": "source .env && convex dev --url $CONVEX_URL --admin-key $CONVEX_ADMIN_KEY"
+  }
+}
+```
+
 
 ## Build
 
