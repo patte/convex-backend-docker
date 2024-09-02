@@ -28,7 +28,11 @@ export INSTANCE_NAME=flying-fox-123
 
 ### Run
 ```bash
-docker run -e INSTANCE_NAME=$INSTANCE_NAME -e INSTANCE_SECRET=$INSTANCE_SECRET ghcr.io/patte/convex-backend-docker
+docker run \
+  -v ./local:/app \
+  -p 3210:3210 -p 3211:3211 \
+  ghcr.io/patte/convex-backend-docker convex-local-backend \
+  --instance-name $INSTANCE_NAME --instance-secret $INSTANCE_SECRET
 ```
 
 ### Docker Compose
@@ -52,11 +56,11 @@ services:
 ```bash
 echo "CONVEX_INSTANCE_NAME=$INSTANCE_NAME"
 echo "CONVEX_INSTANCE_SECRET=$INSTANCE_SECRET"
-echo "CONVEX_ADMIN_KEY=$ADMIN_KEY"
+echo "CONVEX_ADMIN_KEY=\"$ADMIN_KEY\""
 
 CONVEX_INSTANCE_NAME=flying-fox-123
-CONVEX_INSTANCE_SECRET=4fd28a3d07b61dcfc71518f8fae8c036e4110e47fef40195ce805c110408cf21
-CONVEX_ADMIN_KEY=flying-fox-123|01b832d9fd0604d997b78fcbe469d7b5ecca67edd02edd1f037f42a58275b556c74ad32fb72af4a17d5bbd01dcd86c3bc5
+CONVEX_INSTANCE_SECRET=bfec6e5e65f70852f9276720310675cb50c1e1a238a160b4005a32d42f9a69af
+CONVEX_ADMIN_KEY="flying-fox-123|012e37a0303910b9375cabf2859920666e24917de9f614ec936cfbb9d584861c8970d7e06c57b7a2333d5d085270400c06"
 ```
 
 ## Build
