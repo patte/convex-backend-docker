@@ -4,9 +4,9 @@ This is an inofficial docker image for [convex-backend](https://github.com/get-c
 
 The Dockerfile clones the repo from github at the specified release tag. A github action builds the image and pushes it to ghcr.io.
 
-```bash
-ghcr.io/patte/convex-backend-docker:latest
-```
+> [!WARNING] Sporadic updates
+> Building the `linux/arm64` image does exceed the timeout of the free github runner (6h). A local runner is used to build the image (~45min on MacBook Air M2, with bad internet). Until a better solution is found, there will only be sporadic updates of the image, as keeping the local runner running is obviously not an option.
+> `amd64` builds are done on the default runner.
 
 ## Build
 
