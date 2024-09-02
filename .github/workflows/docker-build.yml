@@ -21,12 +21,10 @@ jobs:
             runner: ubuntu-latest
             cache-from: type=gha
             cache-to: type=gha,mode=max
-            cache-type: gha
           - platform: linux/arm64
             runner: self-hosted
-            cache-from: type=local,src=/tmp/.buildx-cache
-            cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
-            cache-type: local
+            cache-from:
+            cache-to:
     runs-on: ${{ matrix.runner }}
     steps:
       - name: Prepare
@@ -64,15 +62,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Cache Docker layers (local)
-        uses: actions/cache@v4
-        if: matrix.cache-type == 'local'
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ env.PLATFORM_PAIR }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ env.PLATFORM_PAIR }}-buildx-
-
       - name: Build and push by digest
         id: build
         uses: docker/build-push-action@v6
@@ -100,15 +89,6 @@ jobs:
           path: /tmp/digests/*
           if-no-files-found: error
           retention-days: 1
-
-      - # Temp fix: only keep most recent cached layers
-        # https://github.com/docker/build-push-action/issues/252
-        # https://github.com/moby/buildkit/issues/1896
-        name: Move cache (local)
-        if: matrix.cache-type == 'local'
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
   merge:
     runs-on: ubuntu-latest
