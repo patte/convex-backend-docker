@@ -27,11 +27,11 @@ convex-local-backend --instance-name INSTANCE_NAME --instance-secret INSTANCE_SE
 See: [SELFHOSTING.md](https://github.com/get-convex/convex-backend/blob/main/SELFHOSTING.md) in convex-backend
 
 ### Generate keys
-    
+
 ```bash
-export INSTANCE_SECRET=$(docker run --rm ghcr.io/patte/convex-backend generate_secret) && \
-export ADMIN_KEY=$(docker run --rm ghcr.io/patte/convex-backend generate_key $INSTANCE_NAME $INSTANCE_SECRET | awk '/Admin Key:/{getline; print}') &&  \
 export INSTANCE_NAME=flying-fox-123
+export INSTANCE_SECRET=$(docker run --rm ghcr.io/patte/convex-backend generate_secret)
+export ADMIN_KEY=$(docker run --rm ghcr.io/patte/convex-backend generate_key $INSTANCE_NAME $INSTANCE_SECRET | awk '/Admin Key:/{getline; print}')
 ```
 
 ### Run
