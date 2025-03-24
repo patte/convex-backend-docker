@@ -1,3 +1,9 @@
+> [!NOTE]
+> Since this repo was created, Convex has released an official image.
+> 
+> You can read more about it in [their blog post](https://stack.convex.dev/self-hosted-develop-and-deploy)
+> or directly [in the repo](https://github.com/get-convex/convex-backend/tree/main/self-hosted).
+
 # convex-backend-docker
 
 This is an inofficial docker image for [convex-backend](https://github.com/get-convex/convex-backend).
